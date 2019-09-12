@@ -1,5 +1,35 @@
 Docker Dynamic DNS Client
 =====
+Github: https://github.com/CushItRealGood/docker-dynamic-dns
+
+Docker Hub: https://hub.docker.com/r/cush/docker-dynamic-dns
+
+This is a fork of blaize/docker-dynamic-dns with added functionality to handle multiple domains. An optional environment variable called DOMAINS has been added to support new functionality, an example of proper usage is below.
+
+## docker-compose example
+
+```
+---
+version: "2"
+services:
+  no-ip:
+   image: cush/docker-dynamic-dns
+   container_name: ddns
+   environment:
+     - USER1=username
+     - PASSWORD1=yourpassword
+     - HOSTNAME1=test1.example.com
+     - USER2=anotheruser
+     - PASSWORD2=your2ndpassword
+     - HOSTNAME2=test2.example.com
+     - DETECTIP=1
+     - INTERVAL=1
+     - SERVICE=google
+     - DOMAINS=2
+   restart: unless-stopped
+```
+
+### Original README:
 
 Docker Hub: https://hub.docker.com/r/blaize/docker-dynamic-dns/
 
