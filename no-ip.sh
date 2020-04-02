@@ -6,7 +6,7 @@ else
         if [[ $DOMAINS != [0-9]* ]]
         then
 		echo "Domains is not an integer."
-		exit 40 #made up exit code values here and below, not sure what exit codes should be
+		exit 40 #made up exit code values here and below
 	else
 		echo "Number of Domains is set to $DOMAINS"
 	fi
@@ -17,9 +17,9 @@ do
 	if [[ -z $(eval echo \$$(echo "USER$COUNTER")) ]]
 	then
 		echo "No user was set for "USER$COUNTER"."
-		exit 41 #disabled for now to make testing easier
+		exit 41 
 	else
-		eval echo \$$(echo "USER$COUNTER") set as USER$COUNTER
+		eval echo USER$COUNTER has been set
 	fi
 done
 
@@ -28,9 +28,9 @@ do
 	if [[ -z $(eval echo \$$(echo "PASSWORD$COUNTER")) ]]
 	then
 		echo "No password was set for "PASSWORD$COUNTER"."
-		exit 42 #disabled for now to make testing easier
+		exit 42 
 	else
-		eval echo \$$(echo "PASSWORD$COUNTER") set as PASSWORD$COUNTER
+		eval echo PASSWORD$COUNTER has been set
 	fi
 done
 
@@ -39,7 +39,7 @@ do
 	if [[ -z $(eval echo \$$(echo "HOSTNAME$COUNTER")) ]]
 	then
 		echo "No hostname was set for "HOSTNAME$COUNTER"."
-		exit 43 #disabled for now to make testing easier
+		exit 43 
 	else 
 		eval echo \$$(echo "HOSTNAME$COUNTER") set as HOSTNAME$COUNTER
 	fi
@@ -166,12 +166,13 @@ else
 			if [[ -z $(eval echo \$$(echo "USER$COUNTER")) && -z $(eval echo \$$(echo "PASSWORD$COUNTER")) ]]
 			then
 				echo "An error occured for "USER$COUNTER" or "PASSWORD$COUNTER"."
-				exit 44 #disabled for now to make testing easier
+				exit 44
 			else
 				#eval echo NOIPURL$COUNTER=https\://\$$(echo "USER$COUNTER\:\$$(echo PASSWORD$COUNTER)@$SERVICEURL")'\?'hostname=\$$(echo "HOSTNAME$COUNTER")'\&'myip=\$$(echo "IP") #show the variables getting set
 				eval NOIPURL$COUNTER=https\://\$$(echo "USER$COUNTER\:\$$(echo PASSWORD$COUNTER)@$SERVICEURL")'\?'hostname=\$$(echo "HOSTNAME$COUNTER")'\&'myip=\$$(echo "IP") #set NOIPURLs
-				eval echo RESULT$COUNTER='\$\('wget --no-check-certificate -qO- \$$(echo "NOIPURL$COUNTER")'\)'
-				eval wget --no-check-certificate -qO- \$$(echo "NOIPURL$COUNTER")
+				#eval echo RESULT$COUNTER='\$\('wget --no-check-certificate -qO- \$$(echo "NOIPURL$COUNTER")'\)' #removed to prevent passing plain text passwords to log
+				eval wget --no-check-certificate -qO- \$$(echo "NOIPURL$COUNTER"); echo " "; eval echo is the status for \$$(echo "HOSTNAME$COUNTER") # The additional echo commands provide visual indicator log witout passwords
+				#eval echo is the status of \$$(echo "HOSTNAME$COUNTER")
 			fi
 		done
 		if [ $INTERVAL -eq 0 ]
