@@ -1,5 +1,6 @@
 Docker Dynamic DNS Client
 =====
+[![Docker Pulls](https://img.shields.io/docker/pulls/cush/docker-dynamic-dns)](https://hub.docker.com/r/cush/docker-dynamic-dns)
 
 This is a [DDNS client for Docker](https://hub.docker.com/r/cush/docker-dynamic-dns), a fork of [blaize/docker-dynamic-dns](https://hub.docker.com/r/blaize/docker-dynamic-dns/). This fork has added functionality of being able to set multiple domain names using an optional environment variable called DOMAINS. A more robust explanation of what this project does can be obtained from [blaize's repo](https://github.com/theonemule/docker-dynamic-dns) and an example of proper usage is below.
 
