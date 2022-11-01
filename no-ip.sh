@@ -154,6 +154,9 @@ then
 			break
 		else
 			sleep "${INTERVAL}m"
+			if [ -z $IP ]; then
+				IP=$(wget -qO- "http://myexternalip.com/raw")
+			fi
 		fi
 
 	done
@@ -180,6 +183,9 @@ else
 			break
 		else
 			sleep "${INTERVAL}m"
+			if [ -z $IP ]; then
+				IP=$(wget -qO- "http://myexternalip.com/raw")
+			fi
 		fi
 	done
 fi
