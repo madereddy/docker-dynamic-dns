@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI Test
 
 on:
   push:
@@ -27,8 +27,13 @@ jobs:
       id: date
       run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
       
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }} --tag $DOCKER_USER/$REPO_NAME:test
-      
-    - name: Docker Push
-      run: docker push $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }} && docker push $DOCKER_USER/$REPO_NAME:test
+    - name: install buildx
+      id: buildx
+      uses: docker/setup-buildx-action@master
+        
+    - name: build the image
+      run: |
+        docker buildx build --push \
+          --tag $DOCKER_USER/$REPO_NAME:test \
+          --tag $DOCKER_USER/$REPO_NAME:test-${{ steps.date.outputs.date }} \
+          --platform linux/amd64,linux/arm/v7,linux/arm64 .
