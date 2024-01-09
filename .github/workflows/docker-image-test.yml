@@ -20,15 +20,15 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
-    - name: Get current date # get the date of the build
+    - name: Get Current Date # get the date of the build
       id: date
       run: echo "date=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_OUTPUT"
       
-    - name: install buildx
+    - name: Install Buildx
       id: buildx
       uses: docker/setup-buildx-action@master
         
-    - name: build the image
+    - name: Build the image
       run: |
         docker buildx build --push \
           --tag ${{ secrets.DOCKER_USER }}/${{  secrets.REPO_NAME  }}:test \
