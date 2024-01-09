@@ -33,4 +33,4 @@ jobs:
         docker buildx build --push \
           --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test \
           --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test-${{ steps.date.outputs.date }} \
-          --platform linux/amd64,linux/arm/v7,linux/arm64 .
+          --platform linux/amd64,linux/arm64 .
