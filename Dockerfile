@@ -1,4 +1,4 @@
-FROM cgr.dev/chainguard/wolfi-base:latest@sha256:bda46ad410744ba315890cd1414d5ec2434d85403bc61b01a02208256f274635
+FROM cgr.dev/chainguard/wolfi-base:latest@sha256:c47abf97153fcba9af42ad9b3627c9db4e5fc0d87bc5e191cbd8f0e9c43616a2
 
 RUN apk update && apk add bash wget
 
